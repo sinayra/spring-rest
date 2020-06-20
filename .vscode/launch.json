@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-OsworksApiApplication<osworks-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.algaworks.osworks.osworksapi.OsworksApiApplication",
+            "projectName": "osworks-api",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-OsworksApiApplication<osworks-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.algaworks.osworks.OsworksApiApplication",
+            "projectName": "osworks-api",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MavenWrapperDownloader",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "MavenWrapperDownloader",
+            "args": ""
+        }
+    ]
+}
