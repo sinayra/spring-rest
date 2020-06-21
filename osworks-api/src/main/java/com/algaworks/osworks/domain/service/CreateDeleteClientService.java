@@ -12,19 +12,19 @@ import com.algaworks.osworks.domain.model.Client;
 public class CreateDeleteClientService {
 
     @Autowired
-    private ClientRepository repository;
+    private ClientRepository clientRepository;
     
     public Client create(Client client){
-        Client oldCliente = repository.findByEmail(client.getEmail());
+        Client oldCliente = clientRepository.findByEmail(client.getEmail());
         if(oldCliente != null && !oldCliente.equals(client)){
             throw new BusinessException("email already registered");
         }
 
-        return repository.save(client);
+        return clientRepository.save(client);
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        clientRepository.deleteById(id);
     }
 
 }

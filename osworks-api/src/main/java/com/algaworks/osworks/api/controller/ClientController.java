@@ -2,13 +2,17 @@ package com.algaworks.osworks.api.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.algaworks.osworks.api.model.ClientInputModel;
+import com.algaworks.osworks.api.model.ClientModel;
 import com.algaworks.osworks.domain.model.Client;
 import com.algaworks.osworks.domain.repository.ClientRepository;
 import com.algaworks.osworks.domain.service.CreateDeleteClientService;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,17 +36,20 @@ public class ClientController {
     @Autowired
     private CreateDeleteClientService clienteService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping
-    public List<Client> index() {
-        return clientRepository.findAll();
+    public List<ClientModel> index() {
+        return toListModel(clientRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Client> show(@PathVariable Long id) {
+    public ResponseEntity<ClientModel> show(@PathVariable Long id) {
         Optional<Client> client = clientRepository.findById(id);
 
         if (client.isPresent()) {
-            return ResponseEntity.ok(client.get());
+            return ResponseEntity.ok(toModel(client.get()));
         }
 
         return ResponseEntity.notFound().build();
@@ -50,32 +57,46 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client create(@Valid @RequestBody Client client) {
-        return clienteService.create(client);
+    public ClientModel create(@Valid @RequestBody ClientInputModel clientInputModel) {
+        Client client = toEntity(clientInputModel);
+
+        return toModel(clienteService.create(client));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @Valid @RequestBody Client client) {
+    public ResponseEntity<ClientModel> update(@PathVariable Long id, @Valid @RequestBody Client client) {
 
-        if(!clientRepository.existsById(id)){
+        if (!clientRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
         client.setId(id);
         client = clienteService.create(client);
 
-        return ResponseEntity.ok(client);
+        return ResponseEntity.ok(toModel(client));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        
-        if(!clientRepository.existsById(id)){
+
+        if (!clientRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
         clienteService.delete(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    private ClientModel toModel(Client client) {
+        return modelMapper.map(client, ClientModel.class);
+    }
+
+    private List<ClientModel> toListModel(List<Client> clients) {
+        return clients.stream().map(client -> toModel(client)).collect(Collectors.toList());
+    }
+
+    private Client toEntity(ClientInputModel clientInputModel) {
+        return modelMapper.map(clientInputModel, Client.class);
     }
 }

@@ -1,6 +1,6 @@
 package com.algaworks.osworks.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,13 +10,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Problem {
 
     private Integer status;
-    private LocalDateTime time;
+    private OffsetDateTime time;
     private String title;
     private List<Field> fields;
 
     public Problem(Integer status, String title) {
         this.status = status;
-        this.time = LocalDateTime.now();
+        this.time = OffsetDateTime.now();
         this.title = title;
     }
 
@@ -36,11 +36,11 @@ public class Problem {
         return title;
     }
 
-    public LocalDateTime getTime() {
+    public OffsetDateTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(OffsetDateTime time) {
         this.time = time;
     }
 

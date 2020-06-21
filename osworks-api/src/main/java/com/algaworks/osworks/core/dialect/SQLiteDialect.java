@@ -1,4 +1,4 @@
-package com.algaworks.osworks.dialect;
+package com.algaworks.osworks.core.dialect;
 
 import java.sql.Types;
 

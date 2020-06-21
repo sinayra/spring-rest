@@ -1,4 +1,4 @@
-package com.algaworks.osworks.dialect;
+package com.algaworks.osworks.core.dialect;
 
 import org.hibernate.MappingException;
 import org.hibernate.dialect.identity.IdentityColumnSupportImpl;

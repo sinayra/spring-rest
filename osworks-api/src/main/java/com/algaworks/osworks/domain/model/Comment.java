@@ -1,20 +1,24 @@
 package com.algaworks.osworks.domain.model;
 
+import java.time.OffsetDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Client {
-
+public class Comment {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String email;
-    private String phone;
+    @ManyToOne
+    private ServiceOrder serviceOrder;
+    private String description;
+    private OffsetDateTime date;
 
     public Long getId() {
         return id;
@@ -24,28 +28,28 @@ public class Client {
         this.id = id;
     }
 
-    public String getPhone() {
-        return phone;
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public OffsetDateTime getDate() {
+        return date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(OffsetDateTime date) {
+        this.date = date;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class Client {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Client other = (Client) obj;
+        Comment other = (Comment) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -73,4 +77,5 @@ public class Client {
         return true;
     }
 
+    
 }
