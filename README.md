@@ -31,4 +31,5 @@ Using the [https://medium.com/@urbanswati/deploying-spring-boot-restapi-using-do
 ## Final thoughts
 Overall, the course was very helpful. It was not the first time that I used Spring, but with this course I got a better understanding of its design patterns and what I should do and not do when creating a Spring Java application.
 And about my own challenges, I am very proud that I could fully deployed my application on Heroku. Even though my app is not 100% secure and I still do not undestand all Heroku cycles for its dynos, I still consider this a very nice first try. Good job, me! 
+
 ![Obama meme](https://i.imgflip.com/2/1hhv9m.jpg)
